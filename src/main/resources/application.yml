@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: SBAuthScaffold
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/sb_auth_scaffold
+    username: postgres # Change to your username
+    password: password # Change to your password
+
