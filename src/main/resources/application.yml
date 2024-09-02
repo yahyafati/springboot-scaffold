@@ -6,4 +6,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/sb_auth_scaffold
     username: postgres # Change to your username
     password: password # Change to your password
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
