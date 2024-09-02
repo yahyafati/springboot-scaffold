@@ -12,3 +12,7 @@ spring:
     show-sql: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+springdoc:
+  show-login-endpoint: true
+  show-actuator: true
+

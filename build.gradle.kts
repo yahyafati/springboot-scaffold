@@ -35,6 +35,8 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
+    implementation("com.auth0:java-jwt:4.4.0")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 

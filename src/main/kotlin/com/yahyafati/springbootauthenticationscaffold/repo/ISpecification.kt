@@ -1,4 +1,6 @@
 package com.yahyafati.springbootauthenticationscaffold.repo
 
-interface ISpecification {
+import com.yahyafati.springbootauthenticationscaffold.models.base.EntityModel
+
+interface ISpecification<T : EntityModel> {
 }
