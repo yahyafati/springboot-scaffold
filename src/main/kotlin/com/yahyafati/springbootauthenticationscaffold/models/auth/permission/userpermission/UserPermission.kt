@@ -1,6 +1,6 @@
 package com.yahyafati.springbootauthenticationscaffold.models.auth.permission.userpermission
 
-import com.yahyafati.springbootauthenticationscaffold.models.auth.User
+import com.yahyafati.springbootauthenticationscaffold.models.auth.AuthUser
 import com.yahyafati.springbootauthenticationscaffold.models.auth.permission.Permission
 import jakarta.persistence.*
 import java.io.Serializable
@@ -14,7 +14,7 @@ class UserPermission(
 
     @MapsId("userId")
     @ManyToOne(fetch = FetchType.LAZY)
-    var user: User = User(),
+    var authUser: AuthUser = AuthUser(),
     @MapsId("permissionId")
     @ManyToOne(fetch = FetchType.LAZY)
     var permission: Permission = Permission(),
@@ -48,7 +48,7 @@ class UserPermission(
 
 
     override fun toString(): String {
-        return "UserPermission(id=$id, user=$user, permission=$permission, type=$type)"
+        return "UserPermission(id=$id, user=$authUser, permission=$permission, type=$type)"
     }
 
     override fun equals(other: Any?): Boolean {

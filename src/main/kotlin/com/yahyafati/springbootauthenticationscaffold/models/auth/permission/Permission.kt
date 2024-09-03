@@ -12,12 +12,11 @@ class Permission(
 
     @Column(unique = true, nullable = false)
     var name: String = "",
-    var description: String = ""
 ) : EntityModel() {
 
 
     override fun toString(): String {
-        return "Permission(id=$id, name='$name', description='$description')"
+        return "Permission(id=$id, name='$name')"
     }
 
     override fun equals(other: Any?): Boolean {

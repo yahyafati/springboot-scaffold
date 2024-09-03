@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.yahyafati.springbootauthenticationscaffold.config.security.SecurityConfigProperties
 import com.yahyafati.springbootauthenticationscaffold.exceptions.base.BaseErrorModel
 import com.yahyafati.springbootauthenticationscaffold.exceptions.base.ExceptionType
-import com.yahyafati.springbootauthenticationscaffold.models.auth.IUserServices
-import com.yahyafati.springbootauthenticationscaffold.models.auth.User
+import com.yahyafati.springbootauthenticationscaffold.models.auth.AuthUser
+import com.yahyafati.springbootauthenticationscaffold.models.auth.IAuthServices
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -20,7 +20,7 @@ import org.springframework.web.filter.OncePerRequestFilter
 
 class JWTAuthorizationFilter(
     securityConfigProperties: SecurityConfigProperties,
-    private val userService: IUserServices,
+    private val userService: IAuthServices,
     private val jwtService: JWTService,
     private val mapper: ObjectMapper
 ) : OncePerRequestFilter() {
@@ -79,12 +79,12 @@ class JWTAuthorizationFilter(
         try {
             val token = rawToken.replace(jwtProperties.prefix, "")
             val username: String = jwtService.extractUsername(token)
-            val loggedInUser: User = userService.findByUsername(username)
+            val loggedInAuthUser: AuthUser = userService.findByUsername(username)
                 ?: throw UsernameNotFoundException("User with username $username not found")
             return UsernamePasswordAuthenticationToken(
-                loggedInUser,
+                loggedInAuthUser,
                 null,
-                loggedInUser.authorities
+                loggedInAuthUser.authorities
             )
         } catch (ex: JWTVerificationException) {
             LOG.error(ex.message)

@@ -1,6 +1,6 @@
 package com.yahyafati.springbootauthenticationscaffold.config.security.authenticationfacade
 
-import com.yahyafati.springbootauthenticationscaffold.models.auth.User
+import com.yahyafati.springbootauthenticationscaffold.models.auth.AuthUser
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -16,10 +16,10 @@ class AuthenticationFacade : IAuthenticationFacade {
     override val authentication: Authentication?
         get() = SecurityContextHolder.getContext().authentication
 
-    override val currentUser: User?
+    override val currentAuthUser: AuthUser?
         get() {
             val principal = authentication?.principal
-            if (principal is User) {
+            if (principal is AuthUser) {
                 return principal
             }
             if (principal == null) {
@@ -29,16 +29,16 @@ class AuthenticationFacade : IAuthenticationFacade {
         }
 
     override val currentUsername: String?
-        get() = currentUser?.username
+        get() = currentAuthUser?.username
     override val currentUserId: Long?
-        get() = currentUser?.id
+        get() = currentAuthUser?.id
 
-    override val forcedCurrentUser: User
-        get() = currentUser ?: throw NoUserInSessionException()
+    override val forcedCurrentAuthUser: AuthUser
+        get() = currentAuthUser ?: throw NoUserInSessionException()
     override val forcedCurrentUsername: String
-        get() = forcedCurrentUser.username
+        get() = forcedCurrentAuthUser.username
     override val forcedCurrentUserId: Long
-        get() = forcedCurrentUser.id
+        get() = forcedCurrentAuthUser.id
 
 
 }

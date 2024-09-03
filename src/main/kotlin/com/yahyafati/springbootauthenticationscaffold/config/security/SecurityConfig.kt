@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.yahyafati.springbootauthenticationscaffold.config.security.jwt.JWTAuthenticationFilter
 import com.yahyafati.springbootauthenticationscaffold.config.security.jwt.JWTAuthorizationFilter
 import com.yahyafati.springbootauthenticationscaffold.config.security.jwt.JWTService
-import com.yahyafati.springbootauthenticationscaffold.models.auth.IUserServices
+import com.yahyafati.springbootauthenticationscaffold.models.auth.IAuthServices
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
@@ -25,7 +25,7 @@ import org.springframework.web.filter.CorsFilter
 class SecurityConfig(
     private val authenticationConfiguration: AuthenticationConfiguration,
     private val securityConfigProperties: SecurityConfigProperties,
-    private val userService: IUserServices,
+    private val userService: IAuthServices,
     private val jwtService: JWTService,
     private val mapper: ObjectMapper
 ) {
@@ -59,7 +59,8 @@ class SecurityConfig(
                         "/actuator/**",
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
-                        "/swagger-ui.html"
+                        "/swagger-ui.html",
+                        "/scalar-ui/**",
                     ).permitAll()
                     .requestMatchers(
                         *securityConfigProperties.authEndpoints.toTypedArray()

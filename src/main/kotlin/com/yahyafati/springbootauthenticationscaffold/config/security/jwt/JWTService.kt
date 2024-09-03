@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.interfaces.Claim
 import com.auth0.jwt.interfaces.DecodedJWT
 import com.yahyafati.springbootauthenticationscaffold.config.security.SecurityConfigProperties
-import com.yahyafati.springbootauthenticationscaffold.models.auth.User
+import com.yahyafati.springbootauthenticationscaffold.models.auth.AuthUser
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.time.Instant
@@ -37,19 +37,19 @@ class JWTService(securityConfigProperties: SecurityConfigProperties) {
     }
 
     fun generateToken(
-        user: User, extraClaims: Map<String, Any> = emptyMap(),
+        authUser: AuthUser, extraClaims: Map<String, Any> = emptyMap(),
     ): String {
-        return buildToken(user, extraClaims)
+        return buildToken(authUser, extraClaims)
     }
 
     private fun buildToken(
-        user: User, extraClaims: Map<String, Any>
+        authUser: AuthUser, extraClaims: Map<String, Any>
     ): String {
         val jwtBuilder = JWT.create()
         extraClaims.forEach { (key, value) -> jwtBuilder.withClaim(key, value.toString()) }
 
         return jwtBuilder
-            .withSubject(user.username)
+            .withSubject(authUser.username)
             .withIssuedAt(Instant.now())
             .withIssuer(jwtProperties.issuer)
             .withExpiresAt(Date(System.currentTimeMillis() + jwtProperties.expiration))
@@ -68,9 +68,9 @@ class JWTService(securityConfigProperties: SecurityConfigProperties) {
         return extractExpiration(token).before(Date())
     }
 
-    fun isTokenValid(token: String, userDetails: User): Boolean {
+    fun isTokenValid(token: String, authUserDetails: AuthUser): Boolean {
         val username: String = extractUsername(token)
-        return username == userDetails.username && !isTokenExpired(token)
+        return username == authUserDetails.username && !isTokenExpired(token)
     }
 
     private fun getSignInKey(): Algorithm {

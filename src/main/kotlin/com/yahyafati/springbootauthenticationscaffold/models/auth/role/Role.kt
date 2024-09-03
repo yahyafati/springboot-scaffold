@@ -8,8 +8,8 @@ import jakarta.persistence.*
 @Table(name = "roles")
 class Role(
     override var id: Long = 0,
+    @Column(unique = true, nullable = false)
     var name: String = "",
-    var description: String = "",
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -23,6 +23,6 @@ class Role(
         get() = name.removePrefix("ROLE_")
 
     override fun toString(): String {
-        return "Role(id=$id, name='$name', description='$description')"
+        return "Role(id=$id, name='$name')"
     }
 }

@@ -6,18 +6,25 @@ import com.yahyafati.springbootauthenticationscaffold.models.base.EntityModel
 import jakarta.persistence.*
 
 @Entity
-class User(
-    @Id
-    override var id: Long = 0,
+@Table(name = "users")
+class AuthUser(
+    @Column(unique = true, nullable = false, length = 50)
     private var username: String = "",
+    @Column(nullable = false)
     private var password: String = "",
+    @Column(nullable = false, length = 100)
+    var email: String = "",
     private var enabled: Boolean = false
 ) : SecurityDetails, EntityModel() {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
     override var role: Role = Role()
     override fun getPassword(): String {
         return password
+    }
+
+    fun setPassword(password: String) {
+        this.password = password
     }
 
     override fun getUsername(): String {
@@ -32,7 +39,7 @@ class User(
         this.enabled = enabled
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = [CascadeType.REMOVE])
+    @OneToMany(mappedBy = "authUser", fetch = FetchType.EAGER, cascade = [CascadeType.REMOVE])
     override var permissions: MutableSet<UserPermission> = mutableSetOf()
 
 }

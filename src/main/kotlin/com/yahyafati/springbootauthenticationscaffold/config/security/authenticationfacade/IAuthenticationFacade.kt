@@ -1,6 +1,6 @@
 package com.yahyafati.springbootauthenticationscaffold.config.security.authenticationfacade
 
-import com.yahyafati.springbootauthenticationscaffold.models.auth.User
+import com.yahyafati.springbootauthenticationscaffold.models.auth.AuthUser
 import org.springframework.security.core.Authentication
 
 interface IAuthenticationFacade {
@@ -16,11 +16,11 @@ interface IAuthenticationFacade {
 
     val authentication: Authentication?
 
-    val currentUser: User?
+    val currentAuthUser: AuthUser?
     val currentUsername: String?
     val currentUserId: Long?
 
-    val forcedCurrentUser: User
+    val forcedCurrentAuthUser: AuthUser
     val forcedCurrentUsername: String
     val forcedCurrentUserId: Long
 

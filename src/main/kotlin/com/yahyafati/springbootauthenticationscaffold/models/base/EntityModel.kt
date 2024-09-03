@@ -1,6 +1,5 @@
 package com.yahyafati.springbootauthenticationscaffold.models.base
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
@@ -19,17 +18,17 @@ abstract class EntityModel : Serializable {
 
     @CreationTimestamp
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     open var createdAt: Timestamp = Timestamp.from(Instant.now())
 
-    @JsonIgnore
-    @Column(name = "created_by_id")
+    @Column(name = "created_by_id", nullable = true)
     open var createdById: Long? = null
 
     @UpdateTimestamp
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     open var updatedAt: Timestamp = Timestamp.from(Instant.now())
 
-    @JsonIgnore
-    @Column(name = "updated_by_id")
+    @Column(name = "updated_by_id", nullable = true)
     open var updatedById: Long? = null
 }

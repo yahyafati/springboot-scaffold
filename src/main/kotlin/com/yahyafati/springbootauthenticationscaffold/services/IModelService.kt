@@ -60,7 +60,7 @@ interface IModelService<T : EntityModel> {
     }
 
     fun save(entity: T): T {
-        val currentUser = authenticationFacade.forcedCurrentUser
+        val currentUser = authenticationFacade.forcedCurrentAuthUser
         entity.updatedById = currentUser.id
         if (entity.id == 0L) {
             entity.createdById = currentUser.id
@@ -68,7 +68,7 @@ interface IModelService<T : EntityModel> {
         return repository.save(entity)
     }
 
-    fun update(entity: T, id: Long, updatedFields: Set<String> = emptySet()): T {
+    fun update(id: Long, entity: T, updatedFields: Set<String> = emptySet()): T {
         val existingEntity: Optional<T> = repository.findById(id)
         if (existingEntity.isEmpty) throw NoEntityFoundException.create(entityName, id)
         entity.id = id

@@ -2,7 +2,7 @@ package com.yahyafati.springbootauthenticationscaffold.config.security.jwt
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.yahyafati.springbootauthenticationscaffold.config.security.SecurityConfigProperties
-import com.yahyafati.springbootauthenticationscaffold.models.auth.User
+import com.yahyafati.springbootauthenticationscaffold.models.auth.AuthUser
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException
 import jakarta.servlet.http.HttpServletRequest
@@ -61,7 +61,7 @@ open class JWTAuthenticationFilter(
     override fun successfulAuthentication(
         request: HttpServletRequest, response: HttpServletResponse, chain: FilterChain, authResult: Authentication
     ) {
-        val token = jwtService.generateToken(authResult.principal as User)
+        val token = jwtService.generateToken(authResult.principal as AuthUser)
         response.addHeader(jwtProperties.header, jwtProperties.prefix + token)
         val responseData = mapOf(
             "title" to "Authentication successful",

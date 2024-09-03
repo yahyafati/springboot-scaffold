@@ -16,3 +16,16 @@ springdoc:
   show-login-endpoint: true
   show-actuator: true
 
+com:
+  yahyafati:
+    scaffold:
+      jwt:
+        secret: secret
+        expiration: 86400000 # 1 day
+        prefix: "Bearer "
+        header: Authorization
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+        allowed-headers: "*"
+        allow-credentials: false
