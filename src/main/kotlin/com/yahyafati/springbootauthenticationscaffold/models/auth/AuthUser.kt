@@ -14,7 +14,7 @@ class AuthUser(
     private var password: String = "",
     @Column(nullable = false, length = 100)
     var email: String = "",
-    private var enabled: Boolean = false
+    private var enabled: Boolean = true
 ) : SecurityDetails, EntityModel() {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
