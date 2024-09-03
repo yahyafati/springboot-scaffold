@@ -1,7 +1,7 @@
 package com.yahyafati.springbootauthenticationscaffold.models.auth
 
-import com.yahyafati.springbootauthenticationscaffold.models.auth._dto.AuthUserDto
-import com.yahyafati.springbootauthenticationscaffold.models.auth._dto.RegisterUserDto
+import com.yahyafati.springbootauthenticationscaffold.models.auth._dto.AuthUserDTO
+import com.yahyafati.springbootauthenticationscaffold.models.auth._dto.RegisterUserDTO
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.HttpStatus
 import org.springframework.validation.annotation.Validated
@@ -19,9 +19,9 @@ class AuthController(
     fun registerUser(
         @RequestBody
         @Validated
-        registerUser: RegisterUserDto
-    ): AuthUserDto {
-        return AuthUserDto(userService.registerUser(registerUser))
+        registerUser: RegisterUserDTO
+    ): AuthUserDTO {
+        return AuthUserDTO(userService.registerUser(registerUser))
     }
 
 }

@@ -6,7 +6,7 @@ import java.io.Serializable
 /**
  * DTO for {@link com.yahyafati.springbootauthenticationscaffold.models.auth.AuthUser}
  */
-data class AuthUserDto(
+data class AuthUserDTO(
     val id: Long = 0L,
     val username: String = "",
     val email: String = "",

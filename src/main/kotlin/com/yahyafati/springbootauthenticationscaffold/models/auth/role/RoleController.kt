@@ -1,6 +1,7 @@
 package com.yahyafati.springbootauthenticationscaffold.models.auth.role
 
 import com.yahyafati.springbootauthenticationscaffold.models.auth.role._dto.CreateUpdateRoleDTO
+import com.yahyafati.springbootauthenticationscaffold.models.auth.role._dto.RoleDTO
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springdoc.core.annotations.ParameterObject
 import org.springframework.data.domain.Page
@@ -19,16 +20,16 @@ class RoleController(
     fun getRoles(
         @ParameterObject
         pageable: Pageable
-    ): Page<Role> {
-        return roleService.findAll(pageable)
+    ): Page<RoleDTO> {
+        return roleService.findAll(pageable).map { RoleDTO(it) }
     }
 
     @GetMapping("/{id}")
     fun getRole(
         @PathVariable
         id: Long
-    ): Role {
-        return roleService.findById(id)
+    ): RoleDTO {
+        return RoleDTO(roleService.findById(id))
     }
 
     @PostMapping("")
@@ -36,8 +37,8 @@ class RoleController(
         @RequestBody
         @Validated
         createRole: CreateUpdateRoleDTO
-    ): Role {
-        return roleService.saveNew(createRole.toRole())
+    ): RoleDTO {
+        return RoleDTO(roleService.saveNew(createRole.toRole()))
     }
 
     @PutMapping("/{id}")
@@ -47,8 +48,8 @@ class RoleController(
         @RequestBody
         @Validated
         updateRole: CreateUpdateRoleDTO
-    ): Role {
-        return roleService.update(id, updateRole.toRole())
+    ): RoleDTO {
+        return RoleDTO(roleService.update(id, updateRole.toRole()))
     }
 
     @DeleteMapping("/{id}")

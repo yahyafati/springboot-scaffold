@@ -3,7 +3,7 @@ package com.yahyafati.springbootauthenticationscaffold.models.auth
 import com.yahyafati.springbootauthenticationscaffold.config.security.authenticationfacade.IAuthenticationFacade
 import com.yahyafati.springbootauthenticationscaffold.exceptions.BadRequestException
 import com.yahyafati.springbootauthenticationscaffold.exceptions.NoEntityFoundException
-import com.yahyafati.springbootauthenticationscaffold.models.auth._dto.RegisterUserDto
+import com.yahyafati.springbootauthenticationscaffold.models.auth._dto.RegisterUserDTO
 import com.yahyafati.springbootauthenticationscaffold.models.auth.role.RoleProvider
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -29,7 +29,7 @@ class AuthServices(
         TODO("Not yet implemented")
     }
 
-    override fun registerUser(registerUser: RegisterUserDto): AuthUser {
+    override fun registerUser(registerUser: RegisterUserDTO): AuthUser {
         val user = registerUser.toAuthUser()
         user.role = roleProvider.getDefaultRole()
         user.password = passwordEncoder.encode(user.password)
