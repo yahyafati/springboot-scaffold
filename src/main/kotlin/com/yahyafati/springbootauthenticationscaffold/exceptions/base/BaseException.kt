@@ -2,6 +2,6 @@ package com.yahyafati.springbootauthenticationscaffold.exceptions.base
 
 open class BaseException(
     val type: ExceptionType,
-    message: String,
-    exception: Exception? = null
+    override val message: String,
+    open val exception: Exception? = null
 ) : RuntimeException(message, exception)

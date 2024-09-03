@@ -5,7 +5,7 @@ import com.yahyafati.springbootauthenticationscaffold.exceptions.base.ExceptionT
 
 class NoEntityFoundException(
     message: String,
-    private val exception: Exception? = null
+    override val exception: Exception? = null
 ) : BaseException(ExceptionType.NO_DATA_FOUND, message, exception) {
 
     companion object {
