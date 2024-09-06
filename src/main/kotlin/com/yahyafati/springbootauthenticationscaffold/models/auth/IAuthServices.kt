@@ -7,7 +7,9 @@ import org.springframework.security.core.userdetails.UserDetailsService
 interface IAuthServices : UserDetailsService, IModelService<AuthUser> {
 
     fun findByUsername(username: String): AuthUser?
+    fun findByEmail(email: String): AuthUser?
     fun getLoggedInUser(): AuthUser
     fun registerUser(registerUser: RegisterUserDTO): AuthUser
+    fun existsByUsername(uniqueUsername: String): Boolean
 
 }

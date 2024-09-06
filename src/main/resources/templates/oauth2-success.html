@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <title>
+        OAuth2 Login Success
+    </title>
+</head>
+<body>
+<h1>
+    OAuth2 Login Success
+</h1>
+<p>
+    You have successfully logged in using OAuth2.
+</p>
+
+<p>
+    <strong>Token: </strong>
+    <code th:text="${token}"></code>
+</p>
+
+<a href="/logout">Logout</a>
+
+<script>
+    <!--  -->
+    console.log("OAuth2 Login Success");
+</script>
+</body>
+
+</html>

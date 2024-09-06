@@ -15,7 +15,7 @@ import kotlin.reflect.KProperty1
 
 interface IModelService<T : EntityModel> {
 
-    val repository: IModelRepoSpecification<T, Long>
+    val repository: IModelRepoSpecification<T>
     val modelProperties: Collection<KProperty1<T, *>>
     val specification: ISpecification<T>
         get() = object : ISpecification<T> {}
@@ -40,7 +40,7 @@ interface IModelService<T : EntityModel> {
 
     fun saveNew(entity: T): T {
         entity.id = 0
-        val saved = repository.save(entity)
+        val saved = save(entity)
         return saved
     }
 
@@ -60,10 +60,10 @@ interface IModelService<T : EntityModel> {
     }
 
     fun save(entity: T): T {
-        val currentUser = authenticationFacade.forcedCurrentAuthUser
-        entity.updatedById = currentUser.id
+        val currentUser = authenticationFacade.currentAuthUser
+        entity.updatedById = currentUser?.id
         if (entity.id == 0L) {
-            entity.createdById = currentUser.id
+            entity.createdById = currentUser?.id
         }
         return repository.save(entity)
     }

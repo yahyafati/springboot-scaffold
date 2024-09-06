@@ -58,7 +58,9 @@ ALTER TABLE permissions
     ADD CONSTRAINT uc_permissions_name UNIQUE (name);
 
 ALTER TABLE roles
-    ADD CONSTRAINT uc_roles_name UNIQUE (name);
+    ADD CONSTRAINT uc_roles_name UNIQUE (name),
+    ADD CONSTRAINT fk_roles_created_by FOREIGN KEY (created_by_id) REFERENCES users (id),
+    ADD CONSTRAINT fk_roles_updated_by FOREIGN KEY (updated_by_id) REFERENCES users (id);
 
 ALTER TABLE users
     ADD CONSTRAINT uc_users_username UNIQUE (username),
@@ -82,4 +84,6 @@ ALTER TABLE role_permissions
 ALTER TABLE users
     ADD CONSTRAINT ck_users_username_not_empty CHECK ( LENGTH(username) > 0 ),
     ADD CONSTRAINT ck_users_password_not_empty CHECK ( LENGTH(password) > 0 ),
-    ADD CONSTRAINT ck_users_email_not_empty CHECK ( LENGTH(email) > 0 );
+    ADD CONSTRAINT ck_users_email_not_empty CHECK ( LENGTH(email) > 0 ),
+    ADD CONSTRAINT fk_users_created_by FOREIGN KEY (created_by_id) REFERENCES users (id),
+    ADD CONSTRAINT fk_users_updated_by FOREIGN KEY (updated_by_id) REFERENCES users (id);

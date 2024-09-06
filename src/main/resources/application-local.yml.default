@@ -1,0 +1,38 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id:
+            client-secret:
+            scope: profile,email
+            client-name: Google
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+          github:
+            client-id:
+            client-secret:
+            scope: read:user, user:email
+            client-name: GitHub
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+
+springdoc:
+  show-login-endpoint: true
+  show-actuator: true
+
+com:
+  yahyafati:
+    scaffold:
+      jwt:
+        secret: secret
+        expiration: 86400000 # 1 day
+        prefix: "Bearer "
+        header: Authorization
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+        allowed-headers: "*"
+        allow-credentials: false
+      oauth2:
+        authorized-redirect-origins:
+          - google.com

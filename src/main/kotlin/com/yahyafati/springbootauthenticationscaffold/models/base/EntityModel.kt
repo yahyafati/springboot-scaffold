@@ -14,6 +14,7 @@ abstract class EntityModel : Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "SERIAL")
     open var id: Long = 0L
 
     @CreationTimestamp
@@ -21,7 +22,11 @@ abstract class EntityModel : Serializable {
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     open var createdAt: Timestamp = Timestamp.from(Instant.now())
 
-    @Column(name = "created_by_id", nullable = true)
+    @Column(
+        name = "created_by_id",
+        nullable = true,
+        updatable = false
+    )
     open var createdById: Long? = null
 
     @UpdateTimestamp

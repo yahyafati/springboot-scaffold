@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component
 data class SecurityConfigProperties(
     var jwt: JwtProperties = JwtProperties(),
     var cors: CorsProperties = CorsProperties(),
+    var oauth2: OAuth2Properties = OAuth2Properties(),
     var baseURL: String = "/api/v1/auth",
 ) {
 
@@ -37,6 +38,10 @@ data class SecurityConfigProperties(
         var exposedHeaders: List<String> = listOf("Authorization"),
         var allowCredentials: Boolean = false,
         var maxAge: Long = 3600L,
+    )
+
+    data class OAuth2Properties(
+        var authorizedRedirectOrigins: List<String> = emptyList(),
     )
 
 }

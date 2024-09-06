@@ -39,3 +39,4 @@ out/
 ### Kotlin ###
 .kotlin
 /.jpb/jpb-settings.xml
+/src/main/resources/application-local.yml

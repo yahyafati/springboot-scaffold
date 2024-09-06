@@ -8,6 +8,7 @@ import jakarta.persistence.*
 @Entity
 @Table(name = "users")
 class AuthUser(
+    override var id: Long = 0L,
     @Column(unique = true, nullable = false, length = 50)
     private var username: String = "",
     @Column(nullable = false)
@@ -29,6 +30,10 @@ class AuthUser(
 
     override fun getUsername(): String {
         return username
+    }
+
+    fun setUsername(username: String) {
+        this.username = username
     }
 
     override fun isEnabled(): Boolean {

@@ -29,3 +29,6 @@ com:
         allowed-methods: "*"
         allowed-headers: "*"
         allow-credentials: false
+      oauth2:
+        authorized-redirect-origins:
+          - google.com

@@ -25,6 +25,10 @@ class AuthServices(
         return repository.findByUsername(username)
     }
 
+    override fun findByEmail(email: String): AuthUser? {
+        return repository.findByEmail(email)
+    }
+
     override fun getLoggedInUser(): AuthUser {
         TODO("Not yet implemented")
     }
@@ -34,6 +38,10 @@ class AuthServices(
         user.role = roleProvider.getDefaultRole()
         user.password = passwordEncoder.encode(user.password)
         return saveNew(user)
+    }
+    
+    override fun existsByUsername(uniqueUsername: String): Boolean {
+        return repository.existsByUsername(uniqueUsername)
     }
 
     override fun loadUserByUsername(username: String?): UserDetails {
