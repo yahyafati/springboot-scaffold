@@ -57,8 +57,8 @@ class CustomOAuth2UserService(
 
         val provider = EOAuth2Provider.from(oAuth2UserRequest.clientRegistration.registrationId)
 
-        var user: AuthUser? = if (oAuth2UserInfo.email.isNotEmpty()) {
-            userServices.findByEmail(oAuth2UserInfo.email)
+        var user: AuthUser? = if (!oAuth2UserInfo.email.isNullOrEmpty()) {
+            userServices.findByEmail(oAuth2UserInfo.email!!)
         } else {
             null
         }
@@ -67,6 +67,10 @@ class CustomOAuth2UserService(
             oAuth2UserInfo.id
         )
         var isNewUser = false
+
+        if (user == null) {
+            user = oAuth2UserProviderService.findUserByProvider(provider, oAuth2UserInfo.id)
+        }
 
         if (user == null) {
             isNewUser = true
@@ -106,7 +110,6 @@ class CustomOAuth2UserService(
 
         user.email = oAuth2UserInfo.email
         user.username = generateUniqueUsernameFromEmail(oAuth2UserInfo.generateUsername())
-        user.password = ""
         user.isEnabled = true
         user.role = roleProvider.getDefaultRole()
         return userServices.saveNew(user)

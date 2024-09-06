@@ -14,11 +14,8 @@ class GitHubOAuth2UserInfo(attributes: Map<String, Any>) : OAuth2UserInfo(attrib
         get() = attributes[nameKey].toString()
     override val name: String
         get() = attributes["name"].toString()
-    override val email: String
-        get() {
-            val email = attributes["email"]
-            return email?.toString() ?: ""
-        }
+    override val email: String?
+        get() = attributes["email"]?.toString()
     override val imageUrl: String
         get() = attributes["avatar_url"].toString()
     override val firstName: String

@@ -9,7 +9,7 @@ import java.io.Serializable
 data class AuthUserDTO(
     val id: Long = 0L,
     val username: String = "",
-    val email: String = "",
+    val email: String? = null,
     val enabled: Boolean = false,
     val roleName: String = ""
 ) : Serializable {

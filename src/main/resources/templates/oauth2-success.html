@@ -4,20 +4,43 @@
         OAuth2 Login Success
     </title>
 </head>
+<style>
+    .container {
+        padding: 2rem;
+        font-family: Arial, sans-serif;
+        margin: auto;
+        max-width: 800px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    p {
+        color: #666;
+    }
+
+    code {
+        color: #f66;
+    }
+</style>
 <body>
-<h1>
-    OAuth2 Login Success
-</h1>
-<p>
-    You have successfully logged in using OAuth2.
-</p>
+<div class="container">
+    <h1>
+        OAuth2 Login Success
+    </h1>
+    <p>
+        You have successfully logged in using OAuth2.
+    </p>
 
-<p>
-    <strong>Token: </strong>
-    <code th:text="${token}"></code>
-</p>
+    <p>
+        <strong>Token: </strong>
+        <code th:text="${token}"></code>
+    </p>
 
-<a href="/logout">Logout</a>
+    <a href="/logout">Logout</a>
+</div>
+
 
 <script>
     <!--  -->

@@ -16,10 +16,9 @@ class OAuth2UserProviderService(
     override val modelProperties: Collection<KProperty1<OAuth2UserProvider, *>>
         get() = OAuth2UserProvider::class.memberProperties
 
-    fun findByUserId(userId: Long): List<OAuth2UserProvider> {
-        return repository.findByUser(AuthUser(id = userId))
+    fun findUserByProvider(providerType: EOAuth2Provider, providerId: String): AuthUser? {
+        return repository.findUserByProvider(providerType, providerId)
     }
-
 
     fun findByProviderTypeAndProviderId(providerType: EOAuth2Provider, providerId: String): OAuth2UserProvider? {
         return repository.findByProviderTypeAndProviderId(providerType, providerId)

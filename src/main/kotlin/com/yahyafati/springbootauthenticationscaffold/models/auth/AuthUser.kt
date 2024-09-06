@@ -9,22 +9,20 @@ import jakarta.persistence.*
 @Table(name = "users")
 class AuthUser(
     override var id: Long = 0L,
+    var email: String? = null,
     @Column(unique = true, nullable = false, length = 50)
     private var username: String = "",
-    @Column(nullable = false)
-    private var password: String = "",
-    @Column(nullable = false, length = 100)
-    var email: String = "",
+    private var password: String? = null,
     private var enabled: Boolean = true
 ) : SecurityDetails, EntityModel() {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
     override var role: Role = Role()
-    override fun getPassword(): String {
+    override fun getPassword(): String? {
         return password
     }
 
-    fun setPassword(password: String) {
+    fun setPassword(password: String?) {
         this.password = password
     }
 
